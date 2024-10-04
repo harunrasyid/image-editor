@@ -9,8 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@techstark/opencv-js": "^4.10.0-release.1",
     "next": "14.2.14",
-    "opencv.js": "^1.2.1",
+    "prettier": "^3.3.3",
     "react": "^18",
     "react-dom": "^18",
     "react-dropzone": "^14.2.9"
