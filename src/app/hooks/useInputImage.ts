@@ -1,8 +1,11 @@
 import { useCallback } from "react";
 import { MAX_FILE_SIZE } from "@/config";
-import { IInputImageProps } from "../input-image.props";
 
-export function useInputImage({ onImageLoad = () => {} }: IInputImageProps) {
+export interface IUseInputImageProps {
+  onImageLoad(newImage: string): void;
+}
+
+export function useInputImage({ onImageLoad = () => {} }: IUseInputImageProps) {
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
 

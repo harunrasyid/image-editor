@@ -1,21 +1,16 @@
-"use client";
-import { ImageCard, InputImage } from "@/components";
-import { useDownloadImage, useProcessImage } from "./hooks";
+import { ImageCard, InputImage } from "../";
+import { IImageUploadProps } from "./image-upload.props";
 
-export const ImageUpload = () => {
-  const { imageSrc, handleSetImageSrc, processedImage, processImage } =
-    useProcessImage();
-  const { handleDownload } = useDownloadImage();
-
+export const ImageUpload = ({
+  onDrop,
+  imageSrc,
+  processedImage,
+  handleDownload,
+}: IImageUploadProps) => {
   return (
     <div className="w-full p-4 flex flex-col items-center">
       {/* Input image */}
-      <InputImage
-        onImageLoad={(newImage) => {
-          handleSetImageSrc(newImage);
-          processImage(newImage);
-        }}
-      />
+      <InputImage onDrop={onDrop} />
 
       {/* Spacer */}
       <div className="mb-8" />

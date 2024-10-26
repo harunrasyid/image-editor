@@ -1,3 +1,3 @@
 export interface IInputImageProps {
-  onImageLoad?(newImage: string): void;
+  onDrop(acceptedFiles: File[]): void;
 }
