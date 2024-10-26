@@ -1,10 +1,8 @@
 import { useDropzone } from "react-dropzone";
 import { ACCEPTED_FILE_TYPE } from "@/config";
 import { IInputImageProps } from "./input-image.props";
-import { useInputImage } from "./hooks";
 
-export const InputImage = ({ onImageLoad = () => {} }: IInputImageProps) => {
-  const { onDrop } = useInputImage({ onImageLoad: onImageLoad });
+export const InputImage = ({ onDrop }: IInputImageProps) => {
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: {

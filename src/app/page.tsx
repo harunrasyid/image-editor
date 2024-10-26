@@ -1,6 +1,21 @@
+"use client";
 import { ImageUpload } from "@/components";
+import { useDownloadImage, useInputImage, useProcessImage } from "./hooks";
 
 export default function Home() {
+  const { imageSrc, handleSetImageSrc, processedImage, processImage } =
+    useProcessImage();
+  const { handleDownload } = useDownloadImage();
+
+  const handleImageLoad = (newImage: string) => {
+    handleSetImageSrc(newImage);
+    processImage(newImage);
+  };
+
+  const { onDrop } = useInputImage({
+    onImageLoad: handleImageLoad,
+  });
+
   return (
     <section className="flex-center flex-col">
       <h1 className="head_text text-center">
@@ -13,7 +28,12 @@ export default function Home() {
       <div className="mb-8" />
 
       {/* Upload Image */}
-      <ImageUpload />
+      <ImageUpload
+        imageSrc={imageSrc}
+        processedImage={processedImage}
+        onDrop={onDrop}
+        handleDownload={handleDownload}
+      />
     </section>
   );
 }
