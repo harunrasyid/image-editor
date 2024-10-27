@@ -1,15 +1,26 @@
 "use client";
-import { ImageUpload } from "@/components";
+import { ImageUpload, LoadingOverlay } from "@/components";
+import { useLoading } from "@/hooks";
 import { useDownloadImage, useInputImage, useProcessImage } from "./hooks";
 
 export default function Home() {
+  const { isLoading, setLoading } = useLoading();
   const { imageSrc, handleSetImageSrc, processedImage, processImage } =
     useProcessImage();
-  const { handleDownload } = useDownloadImage();
+  const { handleDownload } = useDownloadImage({
+    setLoading,
+  });
 
   const handleImageLoad = (newImage: string) => {
-    handleSetImageSrc(newImage);
-    processImage(newImage);
+    try {
+      setLoading(true);
+      handleSetImageSrc(newImage);
+      processImage(newImage);
+    } catch (e) {
+      alert(`Failed to load image ${e}`);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const { onDrop } = useInputImage({
@@ -34,6 +45,9 @@ export default function Home() {
         onDrop={onDrop}
         handleDownload={handleDownload}
       />
+
+      {/* Loading Overlay */}
+      <LoadingOverlay isLoading={isLoading} />
     </section>
   );
 }
